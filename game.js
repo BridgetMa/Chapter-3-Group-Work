@@ -4,7 +4,7 @@ for (var i = 0; i < game.keys.length; i++){
   atom.input.bind(atom.key[game.keys[i]], game.keys[i]);
 };
 atom.currentMoleTime = 0;
-atom.tillNewMole = 2;
+atom.tillNewMole = 0.75;
 game.update = function(dt) {
   atom.currentMoleTime = atom.currentMoleTime + dt;
   if (atom.currentMoleTime > atom.tillNewMole){
@@ -39,6 +39,11 @@ game.bop = {
     }
     else{
       this.total = this.total-1;
+	  
+	  if(total === 0)
+	  {
+		  alert "test";
+	  } 
     }
   }
 }
