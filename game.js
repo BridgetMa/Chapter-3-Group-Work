@@ -12,6 +12,15 @@ game.update = function(dt) {
     atom.currentMoleTime = 0;
     if(game.bop.bopped === false){
       game.bop.total = game.bop.total-1;
+	  
+	  if(game.bop.total === 0)
+	  {
+		atom.context.fillStyle = '#000';
+		atom.context.font = '130px monospace';
+		atom.context.fillText('Score: ' + game.bop.total, 300, 200);
+		confirm("GAME OVER RESTART?");
+	  }
+	  
     }
     else{
       game.bop.bopped = false;
@@ -40,10 +49,10 @@ game.bop = {
     else{
       this.total = this.total-1;
 	  
-	  if(total === 0)
+	  /*if(this.total === 0)
 	  {
-		  alert "test";
-	  } 
+		alert("test");
+	  } */
     }
   }
 }
