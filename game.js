@@ -5,6 +5,8 @@ for (var i = 0; i < game.keys.length; i++){
 };
 atom.currentMoleTime = 0;
 atom.tillNewMole = 0.75;
+var numbersCorrect = 0;
+
 game.update = function(dt) {
   atom.currentMoleTime = atom.currentMoleTime + dt;
   if (atom.currentMoleTime > atom.tillNewMole){
@@ -13,12 +15,19 @@ game.update = function(dt) {
     if(game.bop.bopped === false){
       game.bop.total = game.bop.total-1;
 	  
-	  if(game.bop.total === 0)
+	  if(game.bop.total <= -1)
 	  {
 		atom.context.fillStyle = '#000';
 		atom.context.font = '130px monospace';
 		atom.context.fillText('Score: ' + game.bop.total, 300, 200);
-		confirm("GAME OVER RESTART?");
+		this.bop.draw();
+		var r = confirm("GAME OVER RESTART?");
+		if (r == true) {
+			window.location.reload();
+		} else {
+			window.close();
+		}
+		
 	  }
 	  
     }
@@ -43,6 +52,8 @@ game.bop = {
   with_key: function(key){
     if (!!(game.activeMole + 1) === true && key === game.holes[game.activeMole].label){
       this.total = this.total+1;
+	  numbersCorrect = numbersCorrect + 1;
+	  console.log(numbersCorrect);
       game.activeMole = -1;
       this.bopped = true;
     }
